@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AceBook.View.MySheet"
+             xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+             HasBackdrop="True" BackgroundColor="LightGray">
+
+    <the49:BottomSheet.Detents>
+        <the49:HeightDetent Height="400" />
+    </the49:BottomSheet.Detents>
+
+
+
+    <Grid RowDefinitions="60,auto,60,auto" Padding="20,0,20,0">
+
+        <Image  Source="minus2.png" Grid.Row="0" VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" WidthRequest="50"/>
+
+        <Grid Grid.Row="1"  ColumnDefinitions="auto,auto,5,auto" >
+            <Frame Grid.Column="0" HeightRequest="60" WidthRequest="60" CornerRadius="30" IsClippedToBounds="True" Margin="0,0,10,0" BackgroundColor="Transparent">
+                <Image Source="jio.jpg" HeightRequest="60" WidthRequest="60" Aspect="AspectFill"/>
+            </Frame>
+            <Label x:Name="FirstNameLabel"  Grid.Column="1" Text="First Name" FontSize="20" TextColor="Black" VerticalTextAlignment="Center" />
+            <Label Text="" Grid.Column="2" VerticalTextAlignment="Center"/>
+            <Label x:Name="LastNameLabel" Grid.Column="3" Text="Last Name" FontSize="20" TextColor="Black" VerticalTextAlignment="Center" />
+        </Grid>
+
+        <Border HeightRequest="2" Grid.Row="2"/>
+
+        <VerticalStackLayout Grid.Row="3"  Spacing="10">
+            <HorizontalStackLayout>
+                <ImageButton Source="edit.png" WidthRequest="30" HeightRequest="30"  />
+                <Button Text="Edit" BorderWidth="0" FontSize="15" TextColor="Black" BackgroundColor="Transparent" FontAttributes="Bold" Padding="20,0,20,0" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <ImageButton Source="copy.png" WidthRequest="30" HeightRequest="30"  />
+                <Button x:Name="CopyButton" Text="Copy" BorderWidth="0" FontSize="15" TextColor="Black" BackgroundColor="Transparent" FontAttributes="Bold" Padding="20,0,20,0"/>
+            </HorizontalStackLayout>
+
+            
+
+            <HorizontalStackLayout>
+                <ImageButton Source="deletered.png" WidthRequest="30" HeightRequest="30" />
+                <Button x:Name="DeleteButton" Text="Delete" BorderWidth="0" FontSize="15" TextColor="Red" BackgroundColor="Transparent" FontAttributes="Bold" Padding="20,0,20,0" />
+            </HorizontalStackLayout>
+
+
+
+        </VerticalStackLayout>
+    </Grid>
+
+</the49:BottomSheet>

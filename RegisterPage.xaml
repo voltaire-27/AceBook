@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:vm="clr-namespace:AceBook.ViewModel"
+             x:DataType="vm:RegisterViewModel"
+             x:Class="AceBook.RegisterPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#1E1E1E">
+
+
+    <Frame BackgroundColor="#2E2E2E"
+             
+               Margin="20"
+               CornerRadius="15"
+               BorderColor="#404040"
+               HasShadow="True"
+               VerticalOptions="Center">
+
+        <Grid RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" 
+                  RowSpacing="15">
+
+
+
+            <Label Grid.Row="1" FontSize="28" TextColor="White" FontAttributes="Bold" 
+                       Text="Create Your Account" HorizontalOptions="Center" Padding="0,10,0,10"/>
+
+
+            <material:TextField x:Name="FirstNameEntry" Grid.Row="2" Title="First Name" FontSize="18" 
+                                     AllowClear="True" Text="{Binding FirstName}" TitleColor="#A0A0A0" 
+                                     AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:TextField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.User}" Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+
+            <material:TextField x:Name="LastNameEntry" Grid.Row="3" FontSize="18" Title="Last Name" 
+                                    AllowClear="True" Text="{Binding LastName}" TitleColor="#A0A0A0" 
+                                    AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:TextField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.User}" Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+
+            <material:DatePickerField x:Name="DateOfBirth" Grid.Row="4" Title="Date of Birth" FontSize="18" 
+                                           AllowClear="True" Date="{Binding DateOfBirth}" TitleColor="#A0A0A0" 
+                                           AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:DatePickerField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.Calendar}" Color="#4CAF50"/>
+                </material:DatePickerField.Icon>
+            </material:DatePickerField>
+
+
+            <material:PickerField x:Name="GenderPicker" Grid.Row="5" Title="Gender" FontSize="18" 
+                                      AllowClear="True" SelectedItem="{Binding Gender}" TitleColor="#A0A0A0" 
+                                      AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:PickerField.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Male</x:String>
+                        <x:String>Female</x:String>
+                    </x:Array>
+                </material:PickerField.ItemsSource>
+                <material:PickerField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.Genderless}" Color="#4CAF50"/>
+                </material:PickerField.Icon>
+            </material:PickerField>
+
+
+            <material:TextField x:Name="ConNumEntry" Grid.Row="6" Title="Contact Number" FontSize="18" 
+                                    Keyboard="Numeric" AllowClear="True" Text="{Binding ContactNumber}" 
+                                    TitleColor="#A0A0A0" AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:TextField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.Phone}" Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+
+            <material:TextField x:Name="AddressEntry" Grid.Row="7" Title="Address" FontSize="18" 
+                                    AllowClear="True" Text="{Binding Address}" TitleColor="#A0A0A0" 
+                                    AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:TextField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.House}" Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+
+            <material:TextField x:Name="EmailEntry" Grid.Row="8" Title="Email" FontSize="18" 
+                                      Keyboard="Email" AllowClear="True" Text="{Binding Email}" TitleColor="#A0A0A0" 
+                                      AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:TextField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.Envelope}" Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+            <material:TextField x:Name="PasswordEntry" Grid.Row="9" Title="Password" FontSize="18" 
+                                    IsPassword="True" AllowClear="True" Text="{Binding Password}" TitleColor="#A0A0A0" 
+                                    AccentColor="#4CAF50" BorderColor="#404040" TextColor="White">
+                <material:TextField.Icon>
+                    <FontImageSource FontFamily="FASolid" Glyph="{x:Static fa:Solid.Lock}" Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+
+            <Grid Grid.Row="10">
+                <Button StyleClass="FilledButton" Text="Sign Up" HeightRequest="45" FontSize="20" 
+                            BackgroundColor="#4CAF50" TextColor="White" Command="{Binding SignUpCommand}" 
+                            IsEnabled="{Binding IsNotLoading}"/>
+                <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" 
+                                      HorizontalOptions="Center" VerticalOptions="Center" Color="White"/>
+            </Grid>
+
+
+            <Label Grid.Row="11" HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Already have an account? " FontSize="17" TextColor="White"/>
+                        <Span Text="Sign in" FontSize="17" TextColor="#4CAF50">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+    </Frame>
+
+</ContentPage>

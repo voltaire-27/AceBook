@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="AceBook.View.HomePage"
+                 Shell.NavBarIsVisible="False"
+                 Shell.FlyoutBehavior="Disabled"
+                 xmlns:vm="clr-namespace:AceBook.ViewModel"
+                 xmlns:model="clr-namespace:AceBook.Model"
+                 x:DataType="vm:HomeViewModel" 
+                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                 xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+                 xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+                 BackgroundColor="#1E1E1E">
+
+
+    <ContentPage.Resources>
+        <toolkit:IsStringNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
+    </ContentPage.Resources>
+
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+        <ScrollView>
+            <Grid
+                    Padding="20,0,20,0"
+                    BackgroundColor="#1E1E1E"
+                    RowDefinitions="auto, auto, Auto, Auto, 50, Auto, Auto, Auto, Auto, Auto"
+                    RowSpacing="5">
+
+                <!-- Background Curve -->
+                <Frame Margin="-100,-330,-20,0"
+                           BackgroundColor="White"
+                           CornerRadius="50"
+                           HeightRequest="450"
+                           BorderColor="Transparent"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Start" />
+
+                <!-- Logout Button -->
+                <ImageButton Grid.Row="0"
+                                 Source="logoutred.png"
+                                 HeightRequest="40"
+                                 WidthRequest="35"
+                                 HorizontalOptions="End"
+                                 Margin="0,-40,0,0"
+                                 Command="{Binding LogoutCommand}" />
+
+                <!-- Profile Picture -->
+                <Grid Grid.Row="1">
+                    <Frame Grid.Column="0"
+                               Margin="-130,-60,140,0"
+                               HeightRequest="140"
+                               WidthRequest="140"
+                               CornerRadius="65"
+                               IsClippedToBounds="True"
+                               Padding="0"
+                               HorizontalOptions="Center"
+                               BackgroundColor="#404040">
+                        <Image Source="jio.jpg" 
+                                   HeightRequest="140"
+                                   WidthRequest="140"
+                                   Aspect="AspectFill"/>
+                    </Frame>
+                </Grid>
+
+                <!-- Name -->
+                <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Start" Spacing="2">
+                    <Label Text="{Binding FirstName}" FontSize="Title" FontAttributes="Bold" TextColor="White" />
+
+                    <Label Text="{Binding LastName}" FontSize="Title" FontAttributes="Bold" TextColor="White"/>
+                </HorizontalStackLayout>
+
+                <!-- Email -->
+                <Label Grid.Row="3" Text="{Binding Email}" FontSize="Subtitle" TextColor="#A0A0A0"/>
+
+                <!-- Bio -->
+                <VerticalStackLayout Grid.Row="4">
+                    <Label Text="" FontSize="10"/>
+                    <Label Text="💡 Tech Enthusiast | Software Developer | IoT Innovator" TextColor="#A0A0A0"/>
+                </VerticalStackLayout>
+
+                <!-- Followers/Following -->
+                <HorizontalStackLayout Grid.Row="5">
+                    <Label Text="27" FontSize="Subtitle" FontAttributes="Bold" TextColor="White" />
+                    <Label Text=" " FontSize="24"/>
+                    <Label Text="Followers" FontSize="Subtitle" TextColor="#A0A0A0" />
+                    <Label Text=" " FontSize="24"/>
+                    <Label Text="100" FontSize="Subtitle" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text=" " FontSize="24"/>
+                    <Label Text="Following" FontSize="Subtitle" TextColor="#A0A0A0"/>
+                </HorizontalStackLayout>
+
+                <!-- Post Entry -->
+                <Frame BackgroundColor="#2E2E2E" 
+                           Grid.Row="6"
+                           CornerRadius="40"
+                           Padding="10,0,0,0"
+                           Margin="0,20,0,10"
+                           HasShadow="True"
+                           BorderColor="#404040">
+                    <Entry Placeholder="Write a post..."  
+                               PlaceholderColor="#A0A0A0"
+                               FontSize="18" 
+                               TextColor="White"
+                               IsReadOnly="True">
+                        <Entry.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateAddPostPageCommand}" />
+                        </Entry.GestureRecognizers>
+                    </Entry>
+                </Frame>
+
+                <!-- Posts Header -->
+                <Label Grid.Row="7" 
+                           Text="Posts" 
+                           FontSize="24" 
+                           FontAttributes="Bold" 
+                           TextColor="White"/>
+
+                <!-- Posts Collection -->
+                <CollectionView Grid.Row="8" ItemsSource="{Binding Posts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Post">
+                            <Frame BackgroundColor="#2E2E2E"
+                                       BorderColor="#404040"
+                                       CornerRadius="10"
+                                       Padding="10"
+                                       Margin="0,5,0,5"
+                                       HasShadow="True">
+                                <StackLayout >
+                                    <!-- Post Header -->
+                                    <Grid ColumnDefinitions="50,auto,*" >
+                                        <Frame Grid.Column="0" 
+                                                   WidthRequest="50"
+                                                   HeightRequest="50"  
+                                                   CornerRadius="25"
+                                                   BackgroundColor="#404040">
+                                            <Image Source="jio.jpg" 
+                                                       WidthRequest="50"
+                                                       HeightRequest="50" />
+                                        </Frame>
+                                        <VerticalStackLayout Grid.Column="1" Padding="10,0,0,0">
+                                            <Label 
+                                                   Text="{Binding Author}" 
+                                                   FontSize="Large" 
+                                                   TextColor="White" 
+                                                   VerticalTextAlignment="Center" 
+                                                  />
+                                            <Label Text="{Binding Timestamp, StringFormat='{0:MM/dd/yyyy HH:mm}'}" 
+                                               Padding="0,2,0,0"
+FontSize="12" 
+TextColor="#A0A0A0" />
+                                        </VerticalStackLayout>
+
+
+                                        <skia:SKCanvasView WidthRequest="20" 
+                   HeightRequest="20"
+                   Grid.Column="2"
+                   VerticalOptions="Start"
+                   HorizontalOptions="End"
+                   PaintSurface="OnPaintSurface">
+                                            <skia:SKCanvasView.GestureRecognizers>
+
+                                                <TapGestureRecognizer 
+    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=ShowPostOptionsCommand}"
+    CommandParameter="{Binding}" />
+
+                                            </skia:SKCanvasView.GestureRecognizers>
+                                        </skia:SKCanvasView>
+                                    </Grid>
+
+                                    <!-- Divider -->
+                                    <Border Margin="0,10,0,0" HeightRequest="1" BackgroundColor="#404040"/>
+
+                                    <!-- Post Content -->
+                                    <Label Text="{Binding Content}" 
+                                               FontSize="Medium" 
+                                           CharacterSpacing="2" 
+                                               TextColor="White" 
+                                               Margin="0,10,0,0" />
+
+                                    <Image Source="{Binding ImageUrl}"
+                                           
+        Aspect="AspectFit"
+        HeightRequest="200"
+  Margin="0,10,0,0"
+        IsVisible="{Binding ImageUrl, Converter={StaticResource StringIsNotNullOrEmptyConverter}}" />
+
+
+
+                                    <Grid  ColumnDefinitions="*,*,*" ColumnSpacing="10" Padding="0,20,0,0" >
+                                        <Button Text="Like" Grid.Column="0" TextColor="White" BackgroundColor="#3C3D37" FontAttributes="Bold"/>
+                                        <Button Text="Comment" Grid.Column="1" TextColor="White" BackgroundColor="#3C3D37" FontAttributes="Bold"/>
+                                        <Button Text="Share" Grid.Column="2" TextColor="White" BackgroundColor="#3C3D37" FontAttributes="Bold"/>
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

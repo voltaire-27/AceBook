@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:vm="clr-namespace:AceBook.ViewModel"
+             x:DataType="vm:LoginViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="AceBook.LoginPage" BackgroundColor="#1E1E1E">
+
+    <Frame BackgroundColor="#2E2E2E"
+            Margin="20"
+            CornerRadius="15"
+            BorderColor="#404040"
+            HasShadow="True"
+            VerticalOptions="CenterAndExpand">
+
+        <Grid RowDefinitions="auto, auto,auto,auto,auto,*,200,150"
+              RowSpacing="15">
+
+            <Label Text="Login to your account" 
+                   Grid.Row="2" 
+                   TextColor="White" 
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <material:TextField      
+                Grid.Row="3"
+                Title="Email"
+                AllowClear="True"
+                FontSize="18"  
+                Keyboard="Email" 
+                TitleColor="#A0A0A0" 
+                AccentColor="#4CAF50" 
+                BorderColor="#404040" 
+                TextColor="White"
+                Text="{Binding Email}">
+                <material:TextField.Icon>
+                    <FontImageSource
+                        FontFamily="FASolid"
+                        Glyph="{x:Static fa:Solid.Envelope}"
+                        Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+            <material:TextField 
+                Grid.Row="4"
+                Title="Password"
+                FontSize="18"  
+                IsPassword="True" 
+                AllowClear="True"
+                TitleColor="#A0A0A0" 
+                AccentColor="#4CAF50" 
+                BorderColor="#404040" 
+                TextColor="White"
+                Text="{Binding Password}">
+                <material:TextField.Icon>
+                    <FontImageSource
+                        FontFamily="FASolid"
+                        Glyph="{x:Static fa:Solid.Lock}"
+                        Color="#4CAF50"/>
+                </material:TextField.Icon>
+            </material:TextField>
+
+            <Grid Grid.Row="5" VerticalOptions="Center">
+                <material:CheckBox 
+                    x:Name="RememberMeCheckBox"
+                    Grid.Column="0"
+                    Color="#4CAF50"
+                    Text="Remember Me"
+                    TextFontSize="15"
+                    TextColor="White"
+                    BoxSizeRequest="17"
+                    HorizontalOptions="Start"
+                    IsChecked="{Binding RememberMe}"/>
+
+                <Label 
+                    VerticalTextAlignment="Center"
+                    Grid.Column="1"
+                    Text="Forgot Password?" 
+                    FontSize="15"
+                    TextColor="White"
+                    HorizontalOptions="End">
+                </Label>
+            </Grid>
+
+            <Grid Grid.Row="6" RowDefinitions="auto,auto" RowSpacing="10" VerticalOptions="Center">
+                <Border HeightRequest="0.221" BackgroundColor="#404040"/>
+
+                <Frame BackgroundColor="#2E2E2E" WidthRequest="70" BorderColor="Transparent" CornerRadius="60">
+                    <Label Text="OR" Grid.Row="0" TextColor="White" FontSize="20" HorizontalOptions="Center" />
+                </Frame>
+
+                <HorizontalStackLayout Grid.Row="1" HorizontalOptions="CenterAndExpand" Spacing="20">
+                    <ImageButton Source="google.png" HeightRequest="50" WidthRequest="50" />
+                    <ImageButton Source="facebook.png" HeightRequest="50" WidthRequest="50" />
+                    <ImageButton Source="twitter.png" HeightRequest="50" WidthRequest="50" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout Grid.Row="7" Spacing="15" VerticalOptions="CenterAndExpand">
+                <!-- Button with Loading Indicator -->
+                <Grid>
+                    <Button StyleClass="FilledButton" 
+                            Text="Sign In" 
+                            HeightRequest="45" 
+                            FontSize="20" 
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"
+                            Command="{Binding LoginCommand}" 
+                            IsEnabled="{Binding IsNotLoading}"/>
+
+                    <ActivityIndicator IsVisible="{Binding IsLoading}" 
+                                      IsRunning="{Binding IsLoading}" 
+                                      HorizontalOptions="Center" 
+                                      VerticalOptions="Center" 
+                                      Color="White"/>
+                </Grid>
+
+                <Label HorizontalOptions="Center">
+                    <Label.FormattedText >
+                        <FormattedString>
+                            <Span Text="Don't have an account? " FontSize="17" TextColor="White"/>
+                            <Span Text="Sign up" FontSize="17" TextColor="#4CAF50">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </Grid>
+    </Frame>
+</ContentPage>

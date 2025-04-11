@@ -1,0 +1,99 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AceBook.View.AddPost"
+             Title="Create Post"
+             BackgroundColor="#F9FAFB"
+             Shell.NavBarIsVisible="True"
+             xmlns:vm="clr-namespace:AceBook.ViewModel"
+             x:DataType="vm:AddPostViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Frame BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="20"
+                   HasShadow="True"
+                   BorderColor="#E0E0E0">
+
+                <VerticalStackLayout Spacing="20">
+                    <HorizontalStackLayout Spacing="15">
+                        <Frame WidthRequest="50"
+                               HeightRequest="50"
+                               CornerRadius="25"
+                               IsClippedToBounds="True"
+                               BorderColor="#E0E0E0"
+                               Padding="0">
+                            <Image Source="jio.jpg"
+                                   Aspect="AspectFill"
+                                   WidthRequest="50"
+                                   HeightRequest="50" />
+                        </Frame>
+
+                        <!-- Align first name and last name horizontally -->
+                        <HorizontalStackLayout VerticalOptions="Center" >
+                            <Label Text="{Binding FirstName}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#1E1E1E"/>
+                            <Label Text="{Binding LastName}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#1E1E1E"/>
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <Editor Placeholder="What's on your mind?"
+                            PlaceholderColor="#9E9E9E"
+                            FontSize="16"
+                            TextColor="#333"
+                            BackgroundColor="#FAFAFA"
+                            HeightRequest="100"
+                            CharacterSpacing="2"
+                            AutoSize="TextChanges"                       
+                            Text="{Binding PostContent, Mode=TwoWay}" />
+
+                    <Button Text="Upload Image"
+                            FontSize="14"
+                            BackgroundColor="#F0F0F0"
+                            TextColor="#333"
+                            CornerRadius="10"
+                            HeightRequest="45"
+                            Command="{Binding ToggleImageUploadCommand}" />
+
+                    <VerticalStackLayout IsVisible="{Binding IsImageUploadVisible}" Spacing="15">
+                        <Button Text="Select Image"
+                                FontSize="14"
+                                BackgroundColor="#E3F2FD"
+                                TextColor="#1E88E5"
+                                CornerRadius="10"
+                                Command="{Binding SelectImageCommand}" />
+
+                        <Frame CornerRadius="10"
+                               BorderColor="#E0E0E0"
+                               BackgroundColor="#FAFAFA"
+                               Padding="5"
+                               HasShadow="False">
+                            <Image Source="{Binding SelectedImage}"
+                                   HeightRequest="200"
+                                   Aspect="AspectFit" />
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="#E0E0E0"
+                             HorizontalOptions="Fill" />
+
+                    <Button Text="Post"
+                            
+                            FontSize="16"
+                            BackgroundColor="#1E88E5"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HeightRequest="50"
+                            CornerRadius="10"
+                            Command="{Binding CreatePostCommand}" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
